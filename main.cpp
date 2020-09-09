@@ -1,3 +1,17 @@
+/*
+Przetwarzanie i Analiza Obrazu
+
+Projekt:
+16.Znajd藕 i zaznacz obw贸d tr贸jek na zdj臋ciu. Policz liczb臋 czarnych symboli i je zaznacz.
+Zidentyfikuj karty 7 kier i 3 trefl oraz po艂膮cz ich 艣rodki.
+
+Etap II
+
+MATEUSZ GUZEK
+GUZEK.MATEUSZ.4@GMAIL.COM
+
+*/
+
 #include "Temat_16.h"
 #include <iostream>
 
@@ -16,11 +30,11 @@ int main()
 	Image3CH ColourImage(SZER, WYS); // Create new image Image3CH - three channels image (width,height)
 	Image1CH GrayscaleImage(SZER, WYS); //Load image, (path, flag), default flag is LPL_LOAD_FITTED, no need to pass it every time
 
-	//Wyj渃iowe
+	//Wyj艙ciowe
 	Image3CH ColourImageOut(SZER, WYS);
 	Image1CH GrayscaleImageOut(SZER, WYS);
 
-	//Wyb髍 obrazu
+	//Wyb贸r obrazu
 	cout << "Podaj numer obrazu do wczytania (1 - 4) " << endl;
 	cin >> obraz_numer;
 	do
@@ -65,7 +79,7 @@ int main()
 
 
 	/*
-	//Wy髍 filtra
+	//Wy贸r filtra
 	std::cout << std::endl << "Wybierz sposob filtrowania (1 - 6) " << std::endl;
 	std::cout << "1.Rozmycie Gaussa" << std::endl;
 	std::cout << "2.Niskopasmowy" << std::endl;
@@ -128,7 +142,7 @@ int main()
 		}
 	} while (!wybrano_filtr_sposob);
 
-	//Wyb髍 okna/maski
+	//Wyb贸r okna/maski
 	switch (filtr_numer)
 	{
 	case 1:
@@ -247,7 +261,7 @@ int main()
 		break;
 	}
 
-	//Wyb髍 kolor體
+	//Wyb贸r kolor贸w
 	system("cls");
 	std::cout << "Wybierz sposob przetwarzania (1 - 2) " << std::endl;
 	std::cout << "1.RGB" << std::endl;
@@ -291,7 +305,7 @@ int main()
 	system("cls");
 	std::cout << "Trwa filtrowanie..." << std::endl;
 
-	//Wywo砤nie filtra
+	//Wywo鲁anie filtra
 	switch (filtr_numer) //Filtr
 	{
 	case 1: //Gaussa
