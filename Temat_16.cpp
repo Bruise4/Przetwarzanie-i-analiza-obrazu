@@ -2,8 +2,8 @@
 Przetwarzanie i Analiza Obrazu
 
 Projekt:
-16.ZnajdŸ i zaznacz obwód trójek na zdjêciu. Policz liczbê czarnych symboli i je zaznacz.
-Zidentyfikuj karty 7 kier i 3 trefl oraz po³¹cz ich œrodki.
+16.ZnajdÅº i zaznacz obwÃ³d trÃ³jek na zdjÄ™ciu. Policz liczbÄ™ czarnych symboli i je zaznacz.
+Zidentyfikuj karty 7 kier i 3 trefl oraz poÅ‚Ä…cz ich Å›rodki.
 
 Etap II
 
@@ -14,10 +14,10 @@ GUZEK.MATEUSZ.4@GMAIL.COM
 
 #include "Temat_16.h"
 
-void Mono(Image3CH& rgbImg, Image1CH& grayImg) //Przyk³ad 
+void Mono(Image3CH& rgbImg, Image1CH& grayImg) //PrzykÅ‚ad 
 {
 	using namespace std;
-	//Sprawdzenie rozmiarów
+	//Sprawdzenie rozmiarÃ³w
 	if (rgbImg.width() == grayImg.width() && rgbImg.height() == grayImg.height())
 	{
 		for (int i = 0; i < rgbImg.width(); i++)
@@ -38,10 +38,10 @@ void Maksimum1CH(Image1CH& we, Image1CH& wy, int okno_rozmiar)
 {
 	using namespace std;
 
-	//Sprawdzenie rozmiarów
+	//Sprawdzenie rozmiarÃ³w
 	if (we.width() == wy.width() && we.height() == wy.height())
 	{
-		int ramka = (okno_rozmiar - 1) / 2; //Gruboœæ ramki w pikselach
+		int ramka = (okno_rozmiar - 1) / 2; //GruboÅ›Ä‡ ramki w pikselach
 		int okno_rozmiar_kwadrat = okno_rozmiar * okno_rozmiar;
 		double* okno = new double[okno_rozmiar_kwadrat]; //Wektor z pikseli okna
 
@@ -49,9 +49,9 @@ void Maksimum1CH(Image1CH& we, Image1CH& wy, int okno_rozmiar)
 		{
 			for (int j = 0; j < we.height(); j++)
 			{
-				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramk¹
+				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramkÄ…
 				{
-					//Wpisanie do wektora okna czêœci pikseli obrazu wejœciowego
+					//Wpisanie do wektora okna czÄ™Å›ci pikseli obrazu wejÅ›ciowego
 					for (int x = 0; x < okno_rozmiar; x++)
 					{
 						for (int y = 0; y < okno_rozmiar; y++)
@@ -59,12 +59,12 @@ void Maksimum1CH(Image1CH& we, Image1CH& wy, int okno_rozmiar)
 							okno[okno_rozmiar * y + x] = we(x + i - ramka, y + j - ramka).Intensity();
 						}
 					}
-					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosn¹co
-					wy(i, j).Intensity() = okno[okno_rozmiar_kwadrat - 1]; //Wpisanie maksymalnej wartoœci intensywnoœci z wektora
+					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosnÄ…co
+					wy(i, j).Intensity() = okno[okno_rozmiar_kwadrat - 1]; //Wpisanie maksymalnej wartoÅ›ci intensywnoÅ›ci z wektora
 				}
 				else
 				{
-					wy(i, j).Intensity() = we(i, j).Intensity();	//Filtracja ramki jest niewymagana przy danych zdjêciach
+					wy(i, j).Intensity() = we(i, j).Intensity();	//Filtracja ramki jest niewymagana przy danych zdjÄ™ciach
 				}
 			}
 		}
@@ -72,7 +72,7 @@ void Maksimum1CH(Image1CH& we, Image1CH& wy, int okno_rozmiar)
 	}
 	else
 	{
-		std::cerr << "Rozmiary obrazow roznia sie!" << std::endl;
+		cerr << "Rozmiary obrazow roznia sie!" << endl;
 		return;
 	}
 }
@@ -81,10 +81,10 @@ void Maksimum3CH(Image3CH& we, Image3CH& wy, int okno_rozmiar)
 {
 	using namespace std;
 
-	//Sprawdzenie rozmiarów
+	//Sprawdzenie rozmiarÃ³w
 	if (we.width() == wy.width() && we.height() == wy.height())
 	{
-		int ramka = (okno_rozmiar - 1) / 2; //Gruboœæ ramki w pikselach
+		int ramka = (okno_rozmiar - 1) / 2; //GruboÅ›Ä‡ ramki w pikselach
 		int okno_rozmiar_kwadrat = okno_rozmiar * okno_rozmiar;
 		double* okno = new double[okno_rozmiar_kwadrat]; //Wektor z pikseli okna
 
@@ -92,7 +92,7 @@ void Maksimum3CH(Image3CH& we, Image3CH& wy, int okno_rozmiar)
 		{
 			for (int j = 0; j < we.height(); j++)
 			{
-				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramk¹
+				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramkÄ…
 				{
 					//Red
 					for (int x = 0; x < okno_rozmiar; x++)
@@ -102,8 +102,8 @@ void Maksimum3CH(Image3CH& we, Image3CH& wy, int okno_rozmiar)
 							okno[okno_rozmiar * y + x] = we(x + i - ramka, y + j - ramka).Red();
 						}
 					}
-					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosn¹co
-					wy(i, j).Red() = okno[okno_rozmiar_kwadrat - 1]; //Wpisanie maksymalnej wartoœci intensywnoœci z wektora
+					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosnÄ…co
+					wy(i, j).Red() = okno[okno_rozmiar_kwadrat - 1]; //Wpisanie maksymalnej wartoÅ›ci intensywnoÅ›ci z wektora
 
 					//Green
 					for (int x = 0; x < okno_rozmiar; x++)
@@ -113,8 +113,8 @@ void Maksimum3CH(Image3CH& we, Image3CH& wy, int okno_rozmiar)
 							okno[okno_rozmiar * y + x] = we(x + i - ramka, y + j - ramka).Green();
 						}
 					}
-					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosn¹co
-					wy(i, j).Green() = okno[okno_rozmiar_kwadrat - 1]; //Wpisanie maksymalnej wartoœci intensywnoœci z wektora
+					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosnÄ…co
+					wy(i, j).Green() = okno[okno_rozmiar_kwadrat - 1]; //Wpisanie maksymalnej wartoÅ›ci intensywnoÅ›ci z wektora
 
 					//Blue
 					for (int x = 0; x < okno_rozmiar; x++)
@@ -124,13 +124,13 @@ void Maksimum3CH(Image3CH& we, Image3CH& wy, int okno_rozmiar)
 							okno[okno_rozmiar * y + x] = we(x + i - ramka, y + j - ramka).Blue();
 						}
 					}
-					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosn¹co
-					wy(i, j).Blue() = okno[okno_rozmiar_kwadrat - 1]; //Wpisanie maksymalnej wartoœci intensywnoœci z wektora
+					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosnÄ…co
+					wy(i, j).Blue() = okno[okno_rozmiar_kwadrat - 1]; //Wpisanie maksymalnej wartoÅ›ci intensywnoÅ›ci z wektora
 
 				}
 				else
 				{
-					//Filtracja ramki jest niewymagana przy danych zdjêciach
+					//Filtracja ramki jest niewymagana przy danych zdjÄ™ciach
 					wy(i, j).Red() = we(i, j).Red();
 					wy(i, j).Green() = we(i, j).Green();
 					wy(i, j).Blue() = we(i, j).Blue();
@@ -141,7 +141,7 @@ void Maksimum3CH(Image3CH& we, Image3CH& wy, int okno_rozmiar)
 	}
 	else
 	{
-		std::cerr << "Rozmiary obrazow roznia sie!" << std::endl;
+		cerr << "Rozmiary obrazow roznia sie!" << endl;
 		return;
 	}
 }
@@ -150,10 +150,10 @@ void Minimum1CH(Image1CH& we, Image1CH& wy, int okno_rozmiar)
 {
 	using namespace std;
 
-	//Sprawdzenie rozmiarów
+	//Sprawdzenie rozmiarÃ³w
 	if (we.width() == wy.width() && we.height() == wy.height())
 	{
-		int ramka = (okno_rozmiar - 1) / 2; //Gruboœæ ramki w pikselach
+		int ramka = (okno_rozmiar - 1) / 2; //GruboÅ›Ä‡ ramki w pikselach
 		int okno_rozmiar_kwadrat = okno_rozmiar * okno_rozmiar;
 		double* okno = new double[okno_rozmiar_kwadrat]; //Wektor z pikseli okna
 
@@ -161,9 +161,9 @@ void Minimum1CH(Image1CH& we, Image1CH& wy, int okno_rozmiar)
 		{
 			for (int j = 0; j < we.height(); j++)
 			{
-				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramk¹
+				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramkÄ…
 				{
-					//Wpisanie do wektora okna czêœci pikseli obrazu wejœciowego
+					//Wpisanie do wektora okna czÄ™Å›ci pikseli obrazu wejÅ›ciowego
 					for (int x = 0; x < okno_rozmiar; x++)
 					{
 						for (int y = 0; y < okno_rozmiar; y++)
@@ -171,12 +171,12 @@ void Minimum1CH(Image1CH& we, Image1CH& wy, int okno_rozmiar)
 							okno[okno_rozmiar * y + x] = we(x + i - ramka, y + j - ramka).Intensity();
 						}
 					}
-					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosn¹co
-					wy(i, j).Intensity() = okno[0]; //Wpisanie minimalnej wartoœci intensywnoœci z wektora
+					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosnÄ…co
+					wy(i, j).Intensity() = okno[0]; //Wpisanie minimalnej wartoÅ›ci intensywnoÅ›ci z wektora
 				}
 				else
 				{
-					wy(i, j).Intensity() = we(i, j).Intensity();	//Filtracja ramki jest niewymagana przy danych zdjêciach
+					wy(i, j).Intensity() = we(i, j).Intensity();	//Filtracja ramki jest niewymagana przy danych zdjÄ™ciach
 				}
 			}
 		}
@@ -193,10 +193,10 @@ void Minimum3CH(Image3CH& we, Image3CH& wy, int okno_rozmiar)
 {
 	using namespace std;
 
-	//Sprawdzenie rozmiarów
+	//Sprawdzenie rozmiarÃ³w
 	if (we.width() == wy.width() && we.height() == wy.height())
 	{
-		int ramka = (okno_rozmiar - 1) / 2; //Gruboœæ ramki w pikselach
+		int ramka = (okno_rozmiar - 1) / 2; //GruboÅ›Ä‡ ramki w pikselach
 		int okno_rozmiar_kwadrat = okno_rozmiar * okno_rozmiar;
 		double* okno = new double[okno_rozmiar_kwadrat]; //Wektor z pikseli okna
 
@@ -204,7 +204,7 @@ void Minimum3CH(Image3CH& we, Image3CH& wy, int okno_rozmiar)
 		{
 			for (int j = 0; j < we.height(); j++)
 			{
-				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramk¹
+				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramkÄ…
 				{
 					//Red
 					for (int x = 0; x < okno_rozmiar; x++)
@@ -214,8 +214,8 @@ void Minimum3CH(Image3CH& we, Image3CH& wy, int okno_rozmiar)
 							okno[okno_rozmiar * y + x] = we(x + i - ramka, y + j - ramka).Red();
 						}
 					}
-					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosn¹co
-					wy(i, j).Red() = okno[0]; //Wpisanie minimalnej wartoœci intensywnoœci z wektora
+					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosnÄ…co
+					wy(i, j).Red() = okno[0]; //Wpisanie minimalnej wartoÅ›ci intensywnoÅ›ci z wektora
 
 					//Green
 					for (int x = 0; x < okno_rozmiar; x++)
@@ -225,8 +225,8 @@ void Minimum3CH(Image3CH& we, Image3CH& wy, int okno_rozmiar)
 							okno[okno_rozmiar * y + x] = we(x + i - ramka, y + j - ramka).Green();
 						}
 					}
-					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosn¹co
-					wy(i, j).Green() = okno[0]; //Wpisanie minimalnej wartoœci intensywnoœci z wektora
+					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosnÄ…co
+					wy(i, j).Green() = okno[0]; //Wpisanie minimalnej wartoÅ›ci intensywnoÅ›ci z wektora
 
 					//Blue
 					for (int x = 0; x < okno_rozmiar; x++)
@@ -236,13 +236,13 @@ void Minimum3CH(Image3CH& we, Image3CH& wy, int okno_rozmiar)
 							okno[okno_rozmiar * y + x] = we(x + i - ramka, y + j - ramka).Blue();
 						}
 					}
-					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosn¹co
-					wy(i, j).Blue() = okno[0]; //Wpisanie minimalnej wartoœci intensywnoœci z wektora
+					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosnÄ…co
+					wy(i, j).Blue() = okno[0]; //Wpisanie minimalnej wartoÅ›ci intensywnoÅ›ci z wektora
 
 				}
 				else
 				{
-					//Filtracja ramki jest niewymagana przy danych zdjêciach
+					//Filtracja ramki jest niewymagana przy danych zdjÄ™ciach
 					wy(i, j).Red() = we(i, j).Red();
 					wy(i, j).Green() = we(i, j).Green();
 					wy(i, j).Blue() = we(i, j).Blue();
@@ -262,21 +262,21 @@ void Medianowy1CH(Image1CH& we, Image1CH& wy, int okno_rozmiar)
 {
 	using namespace std;
 
-	//Sprawdzenie rozmiarów
+	//Sprawdzenie rozmiarÃ³w
 	if (we.width() == wy.width() && we.height() == wy.height())
 	{
-		int ramka = (okno_rozmiar - 1) / 2; //Gruboœæ ramki w pikselach
+		int ramka = (okno_rozmiar - 1) / 2; //GruboÅ›Ä‡ ramki w pikselach
 		int okno_rozmiar_kwadrat = okno_rozmiar * okno_rozmiar;
 		double* okno = new double[okno_rozmiar_kwadrat]; //Wektor z pikseli okna
-		int polowa_wektora_okna = (okno_rozmiar_kwadrat - 1) / 2; //D³ugoœæ woktora zawsze nieparzysta
+		int polowa_wektora_okna = (okno_rozmiar_kwadrat - 1) / 2; //DÅ‚ugoÅ›Ä‡ woktora zawsze nieparzysta
 
 		for (int i = 0; i < we.width(); i++)
 		{
 			for (int j = 0; j < we.height(); j++)
 			{
-				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramk¹
+				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramkÄ…
 				{
-					//Wpisanie do wektora okna czêœci pikseli obrazu wejœciowego
+					//Wpisanie do wektora okna czÄ™Å›ci pikseli obrazu wejÅ›ciowego
 					for (int x = 0; x < okno_rozmiar; x++)
 					{
 						for (int y = 0; y < okno_rozmiar; y++)
@@ -284,12 +284,12 @@ void Medianowy1CH(Image1CH& we, Image1CH& wy, int okno_rozmiar)
 							okno[okno_rozmiar * y + x] = we(x + i - ramka, y + j - ramka).Intensity();
 						}
 					}
-					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosn¹co
+					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosnÄ…co
 					wy(i, j).Intensity() = okno[polowa_wektora_okna]; //Wpisanie mediany
 				}
 				else
 				{
-					wy(i, j).Intensity() = we(i, j).Intensity();	//Filtracja ramki jest niewymagana przy danych zdjêciach
+					wy(i, j).Intensity() = we(i, j).Intensity();	//Filtracja ramki jest niewymagana przy danych zdjÄ™ciach
 				}
 			}
 		}
@@ -306,19 +306,19 @@ void Medianowy3CH(Image3CH& we, Image3CH& wy, int okno_rozmiar)
 {
 	using namespace std;
 
-	//Sprawdzenie rozmiarów
+	//Sprawdzenie rozmiarÃ³w
 	if (we.width() == wy.width() && we.height() == wy.height())
 	{
-		int ramka = (okno_rozmiar - 1) / 2; //Gruboœæ ramki w pikselach
+		int ramka = (okno_rozmiar - 1) / 2; //GruboÅ›Ä‡ ramki w pikselach
 		int okno_rozmiar_kwadrat = okno_rozmiar * okno_rozmiar;
 		double* okno = new double[okno_rozmiar_kwadrat]; //Wektor z pikseli okna
-		int polowa_wektora_okna = (okno_rozmiar_kwadrat - 1) / 2; //D³ugoœæ woktora zawsze nieparzysta
+		int polowa_wektora_okna = (okno_rozmiar_kwadrat - 1) / 2; //DÅ‚ugoÅ›Ä‡ woktora zawsze nieparzysta
 
 		for (int i = 0; i < we.width(); i++)
 		{
 			for (int j = 0; j < we.height(); j++)
 			{
-				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramk¹
+				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramkÄ…
 				{
 					//Red
 					for (int x = 0; x < okno_rozmiar; x++)
@@ -328,7 +328,7 @@ void Medianowy3CH(Image3CH& we, Image3CH& wy, int okno_rozmiar)
 							okno[okno_rozmiar * y + x] = we(x + i - ramka, y + j - ramka).Red();
 						}
 					}
-					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosn¹co
+					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosnÄ…co
 					wy(i, j).Red() = okno[polowa_wektora_okna]; //Wpisanie mediany
 
 					//Green
@@ -339,7 +339,7 @@ void Medianowy3CH(Image3CH& we, Image3CH& wy, int okno_rozmiar)
 							okno[okno_rozmiar * y + x] = we(x + i - ramka, y + j - ramka).Green();
 						}
 					}
-					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosn¹co
+					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosnÄ…co
 					wy(i, j).Green() = okno[polowa_wektora_okna]; //Wpisanie mediany
 
 					//Blue
@@ -350,13 +350,13 @@ void Medianowy3CH(Image3CH& we, Image3CH& wy, int okno_rozmiar)
 							okno[okno_rozmiar * y + x] = we(x + i - ramka, y + j - ramka).Blue();
 						}
 					}
-					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosn¹co
-					wy(i, j).Blue() = okno[polowa_wektora_okna]; //Wpisanie minimalnej wartoœci intensywnoœci z wektora
+					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosnÄ…co
+					wy(i, j).Blue() = okno[polowa_wektora_okna]; //Wpisanie minimalnej wartoÅ›ci intensywnoÅ›ci z wektora
 
 				}
 				else
 				{
-					//Filtracja ramki jest niewymagana przy danych zdjêciach
+					//Filtracja ramki jest niewymagana przy danych zdjÄ™ciach
 					wy(i, j).Red() = we(i, j).Red();
 					wy(i, j).Green() = we(i, j).Green();
 					wy(i, j).Blue() = we(i, j).Blue();
@@ -388,7 +388,7 @@ void Niskopasmowy1CH(Image1CH& we, Image1CH& wy, int tryb)
 	1	1	1	1	1
 	*/
 
-	//Sprawdzenie rozmiarów
+	//Sprawdzenie rozmiarÃ³w
 	if (we.width() == wy.width() && we.height() == wy.height())
 	{
 		int okno_rozmiar;
@@ -397,7 +397,7 @@ void Niskopasmowy1CH(Image1CH& we, Image1CH& wy, int tryb)
 		else if (tryb == 2)
 			okno_rozmiar = 5;
 
-		int ramka = (okno_rozmiar - 1) / 2; //Gruboœæ ramki w pikselach
+		int ramka = (okno_rozmiar - 1) / 2; //GruboÅ›Ä‡ ramki w pikselach
 		int okno_rozmiar_kwadrat = okno_rozmiar * okno_rozmiar;
 		double* okno = new double[okno_rozmiar_kwadrat]; //Wektor z pikseli okna
 		int* okno_filtr = new int[okno_rozmiar_kwadrat]; //Wektor z liczb okna filtra
@@ -406,9 +406,9 @@ void Niskopasmowy1CH(Image1CH& we, Image1CH& wy, int tryb)
 		{
 			for (int j = 0; j < we.height(); j++)
 			{
-				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramk¹
+				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramkÄ…
 				{
-					//Wpisanie do wektora okna czêœci pikseli obrazu wejœciowego
+					//Wpisanie do wektora okna czÄ™Å›ci pikseli obrazu wejÅ›ciowego
 					for (int x = 0; x < okno_rozmiar; x++)
 					{
 						for (int y = 0; y < okno_rozmiar; y++)
@@ -449,7 +449,7 @@ void Niskopasmowy1CH(Image1CH& we, Image1CH& wy, int tryb)
 				}
 				else
 				{
-					wy(i, j).Intensity() = we(i, j).Intensity();	//Filtracja ramki jest niewymagana przy danych zdjêciach
+					wy(i, j).Intensity() = we(i, j).Intensity();	//Filtracja ramki jest niewymagana przy danych zdjÄ™ciach
 				}
 			}
 		}
@@ -479,7 +479,7 @@ void Niskopasmowy3CH(Image3CH& we, Image3CH& wy, int tryb)
 	1	1	1	1	1
 	*/
 
-	//Sprawdzenie rozmiarów
+	//Sprawdzenie rozmiarÃ³w
 	if (we.width() == wy.width() && we.height() == wy.height())
 	{
 		int okno_rozmiar;
@@ -488,7 +488,7 @@ void Niskopasmowy3CH(Image3CH& we, Image3CH& wy, int tryb)
 		else if (tryb == 2)
 			okno_rozmiar = 5;
 
-		int ramka = (okno_rozmiar - 1) / 2; //Gruboœæ ramki w pikselach
+		int ramka = (okno_rozmiar - 1) / 2; //GruboÅ›Ä‡ ramki w pikselach
 		int okno_rozmiar_kwadrat = okno_rozmiar * okno_rozmiar;
 		double* okno = new double[okno_rozmiar_kwadrat]; //Wektor z pikseli okna
 		int* okno_filtr = new int[okno_rozmiar_kwadrat]; //Wektor z liczb okna filtra
@@ -497,7 +497,7 @@ void Niskopasmowy3CH(Image3CH& we, Image3CH& wy, int tryb)
 		{
 			for (int j = 0; j < we.height(); j++)
 			{
-				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramk¹
+				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramkÄ…
 				{
 					double suma_intensywnosci = 0;
 					int suma_okna = 0;
@@ -619,7 +619,7 @@ void Niskopasmowy3CH(Image3CH& we, Image3CH& wy, int tryb)
 				}
 				else
 				{
-					//Filtracja ramki jest niewymagana przy danych zdjêciach
+					//Filtracja ramki jest niewymagana przy danych zdjÄ™ciach
 					wy(i, j).Red() = we(i, j).Red();
 					wy(i, j).Green() = we(i, j).Green();
 					wy(i, j).Blue() = we(i, j).Blue();
@@ -650,11 +650,11 @@ void Wysokopasmowy1CH(Image1CH& we, Image1CH& wy, int tryb)
 	-1	-2	-1
 	*/
 
-	//Sprawdzenie rozmiarów
+	//Sprawdzenie rozmiarÃ³w
 	if (we.width() == wy.width() && we.height() == wy.height())
 	{
 		int okno_rozmiar = 3;
-		int ramka = (okno_rozmiar - 1) / 2; //Gruboœæ ramki w pikselach
+		int ramka = (okno_rozmiar - 1) / 2; //GruboÅ›Ä‡ ramki w pikselach
 		int okno_rozmiar_kwadrat = okno_rozmiar * okno_rozmiar;
 		double* okno = new double[okno_rozmiar_kwadrat]; //Wektor z pikseli okna
 		int* okno_filtr = new int[okno_rozmiar_kwadrat]; //Wektor z liczb okna filtra
@@ -663,9 +663,9 @@ void Wysokopasmowy1CH(Image1CH& we, Image1CH& wy, int tryb)
 		{
 			for (int j = 0; j < we.height(); j++)
 			{
-				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramk¹
+				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramkÄ…
 				{
-					//Wpisanie do wektora okna czêœci pikseli obrazu wejœciowego
+					//Wpisanie do wektora okna czÄ™Å›ci pikseli obrazu wejÅ›ciowego
 					for (int x = 0; x < okno_rozmiar; x++)
 					{
 						for (int y = 0; y < okno_rozmiar; y++)
@@ -720,7 +720,7 @@ void Wysokopasmowy1CH(Image1CH& we, Image1CH& wy, int tryb)
 				}
 				else
 				{
-					wy(i, j).Intensity() = we(i, j).Intensity();	//Filtracja ramki jest niewymagana przy danych zdjêciach
+					wy(i, j).Intensity() = we(i, j).Intensity();	//Filtracja ramki jest niewymagana przy danych zdjÄ™ciach
 				}
 			}
 		}
@@ -748,11 +748,11 @@ void Wysokopasmowy3CH(Image3CH& we, Image3CH& wy, int tryb)
 	-1	-2	-1
 	*/
 
-	//Sprawdzenie rozmiarów
+	//Sprawdzenie rozmiarÃ³w
 	if (we.width() == wy.width() && we.height() == wy.height())
 	{
 		int okno_rozmiar = 3;
-		int ramka = (okno_rozmiar - 1) / 2; //Gruboœæ ramki w pikselach
+		int ramka = (okno_rozmiar - 1) / 2; //GruboÅ›Ä‡ ramki w pikselach
 		int okno_rozmiar_kwadrat = okno_rozmiar * okno_rozmiar;
 		double* okno = new double[okno_rozmiar_kwadrat]; //Wektor z pikseli okna
 		int* okno_filtr = new int[okno_rozmiar_kwadrat]; //Wektor z liczb okna filtra
@@ -761,7 +761,7 @@ void Wysokopasmowy3CH(Image3CH& we, Image3CH& wy, int tryb)
 		{
 			for (int j = 0; j < we.height(); j++)
 			{
-				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramk¹
+				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramkÄ…
 				{
 					double suma_intensywnosci = 0;
 					//int suma_okna = 0;
@@ -925,7 +925,7 @@ void Wysokopasmowy3CH(Image3CH& we, Image3CH& wy, int tryb)
 				}
 				else
 				{
-					//Filtracja ramki jest niewymagana przy danych zdjêciach
+					//Filtracja ramki jest niewymagana przy danych zdjÄ™ciach
 					wy(i, j).Red() = we(i, j).Red();
 					wy(i, j).Green() = we(i, j).Green();
 					wy(i, j).Blue() = we(i, j).Blue();
@@ -958,7 +958,7 @@ void RozmycieGaussa1CH(Image1CH& we, Image1CH& wy, int tryb)
 	1	1	2	1	1
 	*/
 
-	//Sprawdzenie rozmiarów
+	//Sprawdzenie rozmiarÃ³w
 	if (we.width() == wy.width() && we.height() == wy.height())
 	{
 		int okno_rozmiar;
@@ -967,7 +967,7 @@ void RozmycieGaussa1CH(Image1CH& we, Image1CH& wy, int tryb)
 		else if (tryb == 2)
 			okno_rozmiar = 5;
 
-		int ramka = (okno_rozmiar - 1) / 2; //Gruboœæ ramki w pikselach
+		int ramka = (okno_rozmiar - 1) / 2; //GruboÅ›Ä‡ ramki w pikselach
 		int okno_rozmiar_kwadrat = okno_rozmiar * okno_rozmiar;
 		double* okno = new double[okno_rozmiar_kwadrat]; //Wektor z pikseli okna
 		int* okno_filtr = new int[okno_rozmiar_kwadrat]; //Wektor z liczb okna filtra
@@ -976,9 +976,9 @@ void RozmycieGaussa1CH(Image1CH& we, Image1CH& wy, int tryb)
 		{
 			for (int j = 0; j < we.height(); j++)
 			{
-				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramk¹
+				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramkÄ…
 				{
-					//Wpisanie do wektora okna czêœci pikseli obrazu wejœciowego
+					//Wpisanie do wektora okna czÄ™Å›ci pikseli obrazu wejÅ›ciowego
 					for (int x = 0; x < okno_rozmiar; x++)
 					{
 						for (int y = 0; y < okno_rozmiar; y++)
@@ -1049,7 +1049,7 @@ void RozmycieGaussa1CH(Image1CH& we, Image1CH& wy, int tryb)
 				}
 				else
 				{
-					wy(i, j).Intensity() = we(i, j).Intensity();	//Filtracja ramki jest niewymagana przy danych zdjêciach
+					wy(i, j).Intensity() = we(i, j).Intensity();	//Filtracja ramki jest niewymagana przy danych zdjÄ™ciach
 				}
 			}
 		}
@@ -1079,7 +1079,7 @@ void RozmycieGaussa3CH(Image3CH& we, Image3CH& wy, int tryb)
 	1	1	2	1	1
 	*/
 
-	//Sprawdzenie rozmiarów
+	//Sprawdzenie rozmiarÃ³w
 	if (we.width() == wy.width() && we.height() == wy.height())
 	{
 		int okno_rozmiar;
@@ -1088,7 +1088,7 @@ void RozmycieGaussa3CH(Image3CH& we, Image3CH& wy, int tryb)
 		else if (tryb == 2)
 			okno_rozmiar = 5;
 
-		int ramka = (okno_rozmiar - 1) / 2; //Gruboœæ ramki w pikselach
+		int ramka = (okno_rozmiar - 1) / 2; //GruboÅ›Ä‡ ramki w pikselach
 		int okno_rozmiar_kwadrat = okno_rozmiar * okno_rozmiar;
 		double* okno = new double[okno_rozmiar_kwadrat]; //Wektor z pikseli okna
 		int* okno_filtr = new int[okno_rozmiar_kwadrat]; //Wektor z liczb okna filtra
@@ -1097,7 +1097,7 @@ void RozmycieGaussa3CH(Image3CH& we, Image3CH& wy, int tryb)
 		{
 			for (int j = 0; j < we.height(); j++)
 			{
-				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramk¹
+				if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramkÄ…
 				{
 					double suma_intensywnosci = 0;
 					int suma_okna = 0;
@@ -1308,7 +1308,7 @@ void RozmycieGaussa3CH(Image3CH& we, Image3CH& wy, int tryb)
 				}
 				else
 				{
-					//Filtracja ramki jest niewymagana przy danych zdjêciach
+					//Filtracja ramki jest niewymagana przy danych zdjÄ™ciach
 					wy(i, j).Red() = we(i, j).Red();
 					wy(i, j).Green() = we(i, j).Green();
 					wy(i, j).Blue() = we(i, j).Blue();
@@ -1327,12 +1327,12 @@ void RozmycieGaussa3CH(Image3CH& we, Image3CH& wy, int tryb)
 
 void Binaryzacja1CH(Image1CH& we, Image1CH& wy, double prog)
 {
-	//Sprawdzenie rozmiarów
+	//Sprawdzenie rozmiarÃ³w
 	if (we.width() == wy.width() && we.height() == wy.height())
 	{
 		/*
-		//////////////Algorytm z wyk³adu///////////////////
-		//1) Wartoœæ pocz¹tkowa progu
+		//////////////Algorytm z wykÅ‚adu///////////////////
+		//1) WartoÅ›Ä‡ poczÄ…tkowa progu
 		double sumaIntensity = 0;
 		int histogramIlosc = 256;
 		double histogram[256];
@@ -1384,17 +1384,17 @@ void Binaryzacja1CH(Image1CH& we, Image1CH& wy, double prog)
 
 void BinaryzacjaSektorowa1CH(Image1CH& we, Image1CH& wy, int okno_rozmiar, double odciecie)
 {
-	//Sprawdzenie rozmiarów
+	//Sprawdzenie rozmiarÃ³w
 	if (we.width() == wy.width() && we.height() == wy.height())
 	{
 		//Z filtra
-		int ramka = (okno_rozmiar - 1) / 2; //Gruboœæ ramki w pikselach
+		int ramka = (okno_rozmiar - 1) / 2; //GruboÅ›Ä‡ ramki w pikselach
 		int okno_rozmiar_kwadrat = okno_rozmiar * okno_rozmiar;
 		for (int i = 0; i < we.width(); i++)
 		{
 			for (int j = 0; j < we.height(); j++)
 			{
-				//Sprawdzenie odciêcia - skrajne wartoœci - przyœpiesza ca³oœæ
+				//Sprawdzenie odciÄ™cia - skrajne wartoÅ›ci - przyÅ›piesza caÅ‚oÅ›Ä‡
 				if (we(i, j).Intensity() < odciecie)
 				{
 					wy(i, j).Intensity() = 0;
@@ -1403,9 +1403,9 @@ void BinaryzacjaSektorowa1CH(Image1CH& we, Image1CH& wy, int okno_rozmiar, doubl
 				{
 					wy(i, j).Intensity() = 1;
 				}
-				else if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramk¹			
+				else if (i >= ramka && i < we.width() - ramka && j >= ramka && j < we.height() - ramka) // Czy jest poza ramkÄ…			
 				{
-					//Próg jakos wartoœæ œrednia z sektora/okna pikseli
+					//PrÃ³g jakos wartoÅ›Ä‡ Å›rednia z sektora/okna pikseli
 					double suma = 0;
 					for (int x = 0; x < okno_rozmiar; x++)
 					{
@@ -1428,7 +1428,7 @@ void BinaryzacjaSektorowa1CH(Image1CH& we, Image1CH& wy, int okno_rozmiar, doubl
 				}
 				else
 				{
-					wy(i, j).Intensity() = we(i, j).Intensity();	//Filtracja ramki jest niewymagana przy danych zdjêciach
+					wy(i, j).Intensity() = we(i, j).Intensity();	//Filtracja ramki jest niewymagana przy danych zdjÄ™ciach
 				}
 			}
 		}
@@ -1464,9 +1464,9 @@ void SegmentacjaKart1CH(Image1CH& we)  //Zwraca ilosc segmentow
 		}
 	}
 
-	//2krok - w jedn¹ stronê   		//Z filtra
+	//2krok - w jednÄ… stronÄ™   		//Z filtra
 	int okno_rozmiar = 3;
-	int ramka = (okno_rozmiar - 1) / 2; //Odleg³oœæ od œrodka ramki
+	int ramka = (okno_rozmiar - 1) / 2; //OdlegÅ‚oÅ›Ä‡ od Å›rodka ramki
 	int okno_rozmiar_kwadrat = okno_rozmiar * okno_rozmiar;
 	int* okno = new int[okno_rozmiar_kwadrat]; //Wektor z pikseli okna
 	for (int i = 0; i < SZER; i++)
@@ -1475,9 +1475,9 @@ void SegmentacjaKart1CH(Image1CH& we)  //Zwraca ilosc segmentow
 		{
 			if (EtykietyKart[i][j] != 0)
 			{
-				if (i >= ramka && i < SZER - ramka && j >= ramka && j < WYS - ramka) // Czy jest poza ramk¹
+				if (i >= ramka && i < SZER - ramka && j >= ramka && j < WYS - ramka) // Czy jest poza ramkÄ…
 				{
-					//Wpisanie do wektora okna czêœci etykiet
+					//Wpisanie do wektora okna czÄ™Å›ci etykiet
 					//Z filtra minimum...
 					for (int x = 0; x < okno_rozmiar; x++)
 					{
@@ -1486,28 +1486,28 @@ void SegmentacjaKart1CH(Image1CH& we)  //Zwraca ilosc segmentow
 							okno[okno_rozmiar * y + x] = EtykietyKart[x + i - ramka][y + j - ramka];
 						}
 					}
-					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosn¹co
+					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosnÄ…co
 
 					//Minimalne nie 0
 					int index = 0;
 					while (okno[index] == 0)
 						index++;
-					EtykietyKart[i][j] = okno[index]; //Wpisanie minimalnej wartoœci z wektora
+					EtykietyKart[i][j] = okno[index]; //Wpisanie minimalnej wartoÅ›ci z wektora
 				}
 			}
 		}
 	}
 
-	//2krok - w drug¹ stronê   	
+	//2krok - w drugÄ… stronÄ™   	
 	for (int i = (SZER - 1); i >= 0; i--)
 	{
 		for (int j = (WYS - 1); j >= 0; j--)
 		{
 			if (EtykietyKart[i][j] != 0)
 			{
-				if (i >= ramka && i < SZER - ramka && j >= ramka && j < WYS - ramka) // Czy jest poza ramk¹
+				if (i >= ramka && i < SZER - ramka && j >= ramka && j < WYS - ramka) // Czy jest poza ramkÄ…
 				{
-					//Wpisanie do wektora okna czêœci etykiet
+					//Wpisanie do wektora okna czÄ™Å›ci etykiet
 					//Z filtra minimum...
 					for (int x = 0; x < okno_rozmiar; x++)
 					{
@@ -1516,13 +1516,13 @@ void SegmentacjaKart1CH(Image1CH& we)  //Zwraca ilosc segmentow
 							okno[okno_rozmiar * y + x] = EtykietyKart[x + i - ramka][y + j - ramka];
 						}
 					}
-					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosn¹co
+					sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosnÄ…co
 
 					//Minimalne nie 0
 					int index = 0;
 					while (okno[index] == 0)
 						index++;
-					EtykietyKart[i][j] = okno[index]; //Wpisanie minimalnej wartoœci z wektora
+					EtykietyKart[i][j] = okno[index]; //Wpisanie minimalnej wartoÅ›ci z wektora
 
 				}
 			}
@@ -1542,7 +1542,7 @@ int LiczEtykietyKart()
 			etykiety[WYS * i + j] = EtykietyKart[i][j];
 		}
 	}
-	std::sort(etykiety, WYS * SZER + etykiety); //Sortowanie rosn¹co
+	std::sort(etykiety, WYS * SZER + etykiety); //Sortowanie rosnÄ…co
 
 	//int licznik = 0;
 	//bool czyDoliczonoEtykiete = false;
@@ -1564,20 +1564,20 @@ int LiczEtykietyKart()
 /*
 void SegmentacjaKart1CH(Image1CH we, Image1CH& wy)  //Zwraca ilosc segmentow
 {
-	//Sprawdzenie rozmiarów
+	//Sprawdzenie rozmiarÃ³w
 	if (we.width() == wy.width() && we.height() == wy.height())
 	{
 		//Segmentacja 4 kart
 		int segmentId = 0;
 
-		//1 krok - dzia³a ;)
+		//1 krok - dziaÅ‚a ;)
 		for (int i = 0; i < we.width(); i++)
 		{
 			for (int j = 0; j < we.height(); j++)
 			{
 				if (we(i, j).Intensity() == 1)
 				{
-					wy(i, j).Intensity() = double(segmentId) / 1024 / 1024; // Mo¿e przesuniêcia bitowe coœ optymalizuj¹
+					wy(i, j).Intensity() = double(segmentId) / 1024 / 1024; // MoÅ¼e przesuniÄ™cia bitowe coÅ› optymalizujÄ…
 					segmentId++;
 				}
 				else
@@ -1587,9 +1587,9 @@ void SegmentacjaKart1CH(Image1CH we, Image1CH& wy)  //Zwraca ilosc segmentow
 			}
 		}
 
-		//2krok - w jedn¹ stronê
+		//2krok - w jednÄ… stronÄ™
 		int okno_rozmiar = 3;
-		int ramka = (okno_rozmiar - 1) / 2; //Odleg³oœæ od œrodka ramki
+		int ramka = (okno_rozmiar - 1) / 2; //OdlegÅ‚oÅ›Ä‡ od Å›rodka ramki
 		int okno_rozmiar_kwadrat = okno_rozmiar * okno_rozmiar;
 		double *okno = new double[okno_rozmiar_kwadrat]; //Wektor z pikseli okna
 		for (int i = 0; i < wy.width(); i++)
@@ -1598,10 +1598,10 @@ void SegmentacjaKart1CH(Image1CH we, Image1CH& wy)  //Zwraca ilosc segmentow
 			{
 				if (wy(i, j).Intensity() != 0)
 				{
-					if (i >= ramka && i < wy.width() - ramka && j >= ramka && j < wy.height() - ramka) // Czy jest poza ramk¹
+					if (i >= ramka && i < wy.width() - ramka && j >= ramka && j < wy.height() - ramka) // Czy jest poza ramkÄ…
 					{
 						//Z filtra minimum...
-						//Wpisanie do wektora okna czêœci pikseli obrazu wejœciowego
+						//Wpisanie do wektora okna czÄ™Å›ci pikseli obrazu wejÅ›ciowego
 						for (int x = 0; x < okno_rozmiar; x++)
 						{
 							for (int y = 0; y < okno_rozmiar; y++)
@@ -1609,17 +1609,17 @@ void SegmentacjaKart1CH(Image1CH we, Image1CH& wy)  //Zwraca ilosc segmentow
 								okno[okno_rozmiar * y + x] = wy(x + i - ramka, y + j - ramka).Intensity();
 							}
 						}
-						sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosn¹co
+						sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosnÄ…co
 
 						//Minimalne nie 0
 						int index = 0;
 						while (okno[index] == 0)
 							index++;
-						wy(i, j).Intensity() = okno[index]; //Wpisanie minimalnej wartoœci intensywnoœci z wektora
+						wy(i, j).Intensity() = okno[index]; //Wpisanie minimalnej wartoÅ›ci intensywnoÅ›ci z wektora
 					}
 					else
 					{
-						wy(i, j).Intensity() = 0; // Zbêdne
+						wy(i, j).Intensity() = 0; // ZbÄ™dne
 					}
 
 				}
@@ -1627,17 +1627,17 @@ void SegmentacjaKart1CH(Image1CH we, Image1CH& wy)  //Zwraca ilosc segmentow
 		}
 		//delete[] okno;
 
-		//2krok - w drug¹ stronê
+		//2krok - w drugÄ… stronÄ™
 		for (int i = (wy.width() - 1) ; i >= 0; i--)
 		{
 			for (int j = (wy.height() - 1); j >= 0 ; j--)
 			{
 				if (wy(i, j).Intensity() != 0)
 				{
-					if (i >= ramka && i < wy.width() - ramka && j >= ramka && j < wy.height() - ramka) // Czy jest poza ramk¹
+					if (i >= ramka && i < wy.width() - ramka && j >= ramka && j < wy.height() - ramka) // Czy jest poza ramkÄ…
 					{
 						//Z filtra minimum...
-						//Wpisanie do wektora okna czêœci pikseli obrazu wejœciowego
+						//Wpisanie do wektora okna czÄ™Å›ci pikseli obrazu wejÅ›ciowego
 						for (int x = 0; x < okno_rozmiar; x++)
 						{
 							for (int y = 0; y < okno_rozmiar; y++)
@@ -1645,17 +1645,17 @@ void SegmentacjaKart1CH(Image1CH we, Image1CH& wy)  //Zwraca ilosc segmentow
 								okno[okno_rozmiar * y + x] = wy(x + i - ramka, y + j - ramka).Intensity();
 							}
 						}
-						sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosn¹co
+						sort(okno, okno + okno_rozmiar_kwadrat); //Sortowanie rosnÄ…co
 
 						//Minimalne nie 0
 						int index = 0;
 						while (okno[index] == 0)
 							index++;
-						wy(i, j).Intensity() = okno[index]; //Wpisanie minimalnej wartoœci intensywnoœci z wektora
+						wy(i, j).Intensity() = okno[index]; //Wpisanie minimalnej wartoÅ›ci intensywnoÅ›ci z wektora
 					}
 					else
 					{
-						wy(i, j).Intensity() = 0; // Zbêdne
+						wy(i, j).Intensity() = 0; // ZbÄ™dne
 					}
 				}
 			}
@@ -1685,12 +1685,12 @@ void MinimalizacjaEtykietKart()
 			etykiety[WYS * i + j] = EtykietyKart[i][j];
 		}
 	}
-	sort(etykiety, WYS * SZER + etykiety); //Sortowanie rosn¹co
+	sort(etykiety, WYS * SZER + etykiety); //Sortowanie rosnÄ…co
 
-	//Zapisanie wartoœci pocz¹tkowych etykiet
+	//Zapisanie wartoÅ›ci poczÄ…tkowych etykiet
 	for (int i = 0; i < WYS * SZER - 1; i++)
 	{
-		if (etykiety[i] != etykiety[i + 1]) //Szukanie przeskoków
+		if (etykiety[i] != etykiety[i + 1]) //Szukanie przeskokÃ³w
 		{
 			etykietyZredukowane[indeksEtykiety] = etykiety[i + 1];
 			cout << "Etykieta: " << etykietyZredukowane[indeksEtykiety] << endl;
@@ -1707,7 +1707,7 @@ void MinimalizacjaEtykietKart()
 			if (EtykietyKart[i][j] != 0)
 			{
 				indeksEtykiety = 0;
-				while (EtykietyKart[i][j] != etykietyZredukowane[indeksEtykiety]) // Musi byæ taka wartoœæ
+				while (EtykietyKart[i][j] != etykietyZredukowane[indeksEtykiety]) // Musi byÄ‡ taka wartoÅ›Ä‡
 				{
 					indeksEtykiety++;
 				}
@@ -1715,7 +1715,7 @@ void MinimalizacjaEtykietKart()
 			}
 		}
 	}
-	//Zredokowane wartoœci etykiety
+	//Zredokowane wartoÅ›ci etykiety
 
 
 	//Sprawdzenie
@@ -1727,7 +1727,7 @@ void MinimalizacjaEtykietKart()
 			etykiety[WYS * i + j] = EtykietyKart[i][j];
 		}
 	}
-	sort(etykiety, WYS * SZER + etykiety); //Sortowanie rosn¹co
+	sort(etykiety, WYS * SZER + etykiety); //Sortowanie rosnÄ…co
 
 	indeksEtykiety = 0;
 	for (int i = 0; i < WYS * SZER - 1; i++)
@@ -1765,7 +1765,7 @@ void EtykietyNa1CH(Image1CH& wy, double min, double max)
 	cout << "Etykieta Maks: " << EtykietaMax << endl;
 	//system("pause");
 
-	//Skalowanie wartoœci intensywnosci na zakres min - max
+	//Skalowanie wartoÅ›ci intensywnosci na zakres min - max
 	for (int i = 0; i < wy.width(); i++)
 	{
 		for (int j = 0; j < wy.height(); j++)
@@ -1795,7 +1795,7 @@ void RozciagniecieHistogramu1CH(Image1CH& wy, double min, double max)
 	cout << "Maks: " << IntensityMax << endl;
 	system("pause");
 
-	//Skalowanie wartoœci intensywnosci na zakres min - max
+	//Skalowanie wartoÅ›ci intensywnosci na zakres min - max
 	for (int i = 0; i < wy.width(); i++)
 	{
 		for (int j = 0; j < wy.height(); j++)
